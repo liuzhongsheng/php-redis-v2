@@ -31,6 +31,11 @@
         $obj -> content = '这是邮件内容';
         $obj -> block = true; //是否开启阻塞模式：默认true 开启 false 关闭，如果需要开启可以注释该行
         $obj -> timeOut = 30; //超时时间（秒） 如果为阻塞模式时该参数生效
+        $obj -> attachment = [
+            '附件1',
+            '附件2',
+            .....
+        ];
         $emailInfo = $obj -> popQueue('reg_email'); //从队列中获取待处理的任务
         $obj->sendEmail($emailInfo[1]);
         //后续逻辑处理
@@ -59,7 +64,7 @@ return [
 更新日志
 <br>
 <pre>
-    2017-12-06 新增debug模式，代码结构优化
+    2017-12-06 新增debug,附件模式，代码结构优化
 </pre>
 <p>以上为本程序使用方式欢迎大家提提建议或者加入QQ群：456605791 交流，如果觉得代码写得还行请赞一个谢谢,欢迎提出更好的解决办法<p>
 <b>url:<a href='https://www.php63.cc'>https://www.php63.cc</a></b>
