@@ -7,7 +7,19 @@
     $result = require APP_PATH.'/plugin/RedisEmail/RedisEmail.class.php';
     if ($result) {
         $obj = \redisEmail::getInstance();
+        $obj ->joinQueue($param);
      }   
+</pre>
+
+<pre>
+参数示例:
+[
+    'key' => 'reg_email', //redis里的key
+    'value' => [
+        '996674366@qq.com', //收件人
+        'liuzhongsheng@xxx.cn'//收件人
+    ]
+]
 </pre>
 <pre>发送邮件示例：
     $result = require APP_PATH.'/plugin/RedisEmail/RedisEmail.class.php';
