@@ -15,7 +15,7 @@
         $obj = \redisEmail::getInstance();
         $obj -> title = '这是邮件标题';
         $obj -> subject = '这是邮件主题';
-        $obj -> content = '<h1>这是邮件内容</h1>';
+        $obj -> content = '这是邮件内容';
         $obj -> block = true; //是否开启阻塞模式：默认true 开启 false 关闭，如果需要开启可以注释该行
         $obj -> timeOut = 30; //超时时间（秒） 如果为阻塞模式时该参数生效
         $emailInfo = $obj -> popQueue('reg_email'); //从队列中获取待处理的任务
