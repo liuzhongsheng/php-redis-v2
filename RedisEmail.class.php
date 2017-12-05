@@ -55,6 +55,12 @@ class RedisEmail
      * @var bool true 开启 false关闭
      */
     public $debug = false;
+
+    /**
+     * 附件地址，多个请用逗号分隔
+     * @var array
+     */
+    public $attachment = [];
     /**
      * 为了避免类被重复实例化，第一次实例化后将会把实例化后的结果存入该方法
      * @var
@@ -166,6 +172,9 @@ class RedisEmail
             $mail->setFrom($this->config['email_from'], $this->config['email_from_name']); //发件人
             $mail->addAddress($email, $this->title);     // 收件人
 
+            //附件设置
+            $this->isAttachment();
+
             //邮件内容设置
             //设置内容是否支持html格式
             $this->isHTHML();
@@ -201,5 +210,18 @@ class RedisEmail
             return $this->email->Body = $this->content;
         }
         return $this->email->AltBody = $this->content;
+    }
+
+    /**
+     * 检测是否带有附件，并且检测是否重新指定名称
+     */
+    private function isAttachment()
+    {
+        if ($this->attachment != '') {
+            foreach ($this->attachment as $value)
+            {
+                $this->email->addAttachment($value);
+            }
+        }
     }
 }
