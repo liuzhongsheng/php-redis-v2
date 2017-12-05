@@ -25,6 +25,7 @@
     $result = require APP_PATH.'/plugin/RedisEmail/RedisEmail.class.php';
     if ($result) {
         $obj = \redisEmail::getInstance();
+        $obj -> debug = true; //开启debug模式：true 是 false 否
         $obj -> title = '这是邮件标题';
         $obj -> subject = '这是邮件主题';
         $obj -> content = '这是邮件内容';
@@ -55,6 +56,10 @@ return [
     'email_is_html'     =>  true, // 是否HTML格式邮件
 ];
 </pre>
-
+更新日志
+<br>
+<pre>
+    2017-12-06 新增debug模式，代码结构优化
+</pre>
 <p>以上为本程序使用方式欢迎大家提提建议或者加入QQ群：456605791 交流，如果觉得代码写得还行请赞一个谢谢,欢迎提出更好的解决办法<p>
 <b>url:<a href='https://www.php63.cc'>https://www.php63.cc</a></b>
