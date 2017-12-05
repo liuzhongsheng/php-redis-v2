@@ -51,12 +51,20 @@ class RedisEmail
     public $timeOut = 100;
 
     /**
+     * 是否开启debug，开启debug将会输出运行信息
+     * @var bool true 开启 false关闭
+     */
+    public $debug = false;
+    /**
      * 为了避免类被重复实例化，第一次实例化后将会把实例化后的结果存入该方法
      * @var
      */
     private static $instance;
 
-
+    /**
+     * @var email 实例化后的对象信息
+     */
+    private $email;
     /**
      * @var 配置项
      */
@@ -144,8 +152,9 @@ class RedisEmail
      */
     public function sendEmail($email)
     {
-        $mail = new PHPMailer();
+        $this->email = $mail = new PHPMailer();
         try {
+            $this->isDebug();   //是否开启调试模式
             $mail->isSMTP();                                      // 设置邮件发送模式
             $mail->Host     = $this->config['email_host'];       // 服务地址
             $mail->SMTPAuth = $this->config['email_smtp_auth'];  // Enable SMTP authentication
@@ -158,14 +167,39 @@ class RedisEmail
             $mail->addAddress($email, $this->title);     // 收件人
 
             //邮件内容设置
-            $mail->isHTML($this->config['email_is_html']); // 是否HTML格式邮件                                 // Set email format to HTML
-            $mail->Subject = $this->subject; //邮件主题
-            $mail->Body    = $this->content; //带html标签的邮件内容
-            $mail->AltBody = $this->content; //不带html标签的内容
+            //设置内容是否支持html格式
+            $this->isHTHML();
+            //设置邮件主题
+            $mail->Subject = $this->subject;
+
             return $mail->send();
         } catch (Exception $e) {
             echo 'Message could not be sent.';
             echo '发送失败: ' . $mail->ErrorInfo;
         }
+    }
+
+    /**
+     * 是否开启debug
+     */
+    private function isDebug()
+    {
+        if ($this->debug == true) {
+            return $this->email->SMTPDebug = 2;
+        }
+    }
+
+    /**
+     * 根据配置文件设置内容是否带有html格式
+     * @return string
+     */
+    private function isHTHML()
+    {
+        $this->email->isHTML($this->config['email_is_html']);
+        if ($this->config['email_is_html'] == true) {
+            //如果开启了html格式，则内容可以包含html标签
+            return $this->email->Body = $this->content;
+        }
+        return $this->email->AltBody = $this->content;
     }
 }
