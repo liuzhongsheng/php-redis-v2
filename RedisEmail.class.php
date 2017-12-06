@@ -224,4 +224,14 @@ class RedisEmail
             }
         }
     }
+
+    /**
+     * 获取key的总长度
+     * @param $key 要获取的key
+     * @return int 长度
+     */
+    public function getCount($key)
+    {
+        return $this->redis->llen($key);
+    }
 }
