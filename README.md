@@ -21,6 +21,10 @@
     ]
 ]
 </pre>
+<pre>
+查询队列里指定key的总数
+$obj -> getCount('reg_email');
+</pre>
 <pre>发送邮件示例：
     $result = require APP_PATH.'/plugin/RedisEmail/RedisEmail.class.php';
     if ($result) {
@@ -74,7 +78,7 @@ return [
 更新日志
 <br>
 <pre>
-    2017-12-06 新增debug,附件模式,执行shell，代码结构优化
+    2017-12-06 新增debug,附件模式,执行shell，查询队列总数 代码结构优化
 </pre>
 <p>以上为本程序使用方式欢迎大家提提建议或者加入QQ群：456605791 交流，如果觉得代码写得还行请赞一个谢谢,欢迎提出更好的解决办法<p>
 <b>url:<a href='https://www.php63.cc'>https://www.php63.cc</a></b>
