@@ -61,10 +61,20 @@ return [
     'email_is_html'     =>  true, // 是否HTML格式邮件
 ];
 </pre>
+
+服务端运行(linux)
+<pre>
+    nohup  /root/shell/xxx.sh >> /root/shell/xxx.sh.log  2>&1 &
+注意事项：
+    1.shell 需要给予权限 chmod 755 ./xxx.sh
+    2.执行时带上路径
+    3.需要将shell里的prefix='/root/shell' 替换为你自己的路径
+    4.默认时间为一秒，可以通过second修改
+</pre>
 更新日志
 <br>
 <pre>
-    2017-12-06 新增debug,附件模式，代码结构优化
+    2017-12-06 新增debug,附件模式,执行shell，代码结构优化
 </pre>
 <p>以上为本程序使用方式欢迎大家提提建议或者加入QQ群：456605791 交流，如果觉得代码写得还行请赞一个谢谢,欢迎提出更好的解决办法<p>
 <b>url:<a href='https://www.php63.cc'>https://www.php63.cc</a></b>
